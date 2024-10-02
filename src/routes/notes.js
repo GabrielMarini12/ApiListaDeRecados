@@ -78,16 +78,16 @@ router.put("/message/:id", validateUpdateMessage, (request, response) => {
 router.delete("/message/:id", (request, response) => {
   const { id } = request.params;
 
-  const note = notes.find((note) => note.id === id);
+  const noteIndex = notes.findIndex((note) => note.id === id);
 
-  if (!note) {
+  if (noteIndex === -1) {
     return response.status(404).json({
       message:
         "Mensagem não encontrada, verifique o identificador em nosso banco.",
     });
   }
 
-  const [deletedMessage] = notes.splice(note, 1);
+  const [deletedMessage] = notes.splice(noteIndex, 1);
 
   return response.status(200).json({
     message: "Mensagem apagada com sucesso!",
