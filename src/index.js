@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 
 import usersRouter from "./routes/users";
+import notesRouter from "./routes/notes";
 
 const app = express();
 const PORT = 3001;
@@ -15,6 +16,7 @@ app.get("/", (request, response) => {
 });
 
 app.use("/users", usersRouter);
+app.use("/notes", notesRouter);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);

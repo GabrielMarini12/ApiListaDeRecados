@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 
 import {
   validateUserRegistration,
-  validadeUserLogin,
+  validateUserLogin,
 } from "../middlewares/validation";
 
 const router = express.Router();
@@ -39,7 +39,7 @@ router.post("/signup", validateUserRegistration, async (request, response) => {
   });
 });
 
-router.post("/login", validadeUserLogin, async (request, response) => {
+router.post("/login", validateUserLogin, async (request, response) => {
   try {
     const { email, password } = request.body;
 
