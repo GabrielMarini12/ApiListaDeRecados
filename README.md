@@ -45,5 +45,8 @@ Api de Login de usuários e Lista de Recados.
 - Rodar a Api:
   - npm run dev
  
+# Documentação da Api
+https://documenter.getpostman.com/view/34428004/2sAXxJiafZ
+ 
 # Deploy
 https://apilistaderecados.onrender.com/
