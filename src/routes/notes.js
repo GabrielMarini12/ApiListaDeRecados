@@ -48,7 +48,7 @@ router.get("/message/:email", (request, response) => {
     });
   }
 
-  const userNotes = notes.filter((note) => note.id === id);
+  const userNotes = notes.filter((note) => note.email === email);
 
   response.status(200).json({
     message: `Seja bem vindo(a)!`,
