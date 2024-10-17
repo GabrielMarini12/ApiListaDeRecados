@@ -97,7 +97,7 @@ router.delete("/message/:id", (request, response) => {
   });
 });
 
-router.get("/details/:id", (request, response) => {
+router.get("/message/details/:id", (request, response) => {
   const { id } = request.params;
 
   const note = notes.find((note) => note.id === id);
