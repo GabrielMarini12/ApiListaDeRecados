@@ -37,8 +37,29 @@ router.post("/message", validateCreateMessage, (request, response) => {
   });
 });
 
+// router.get("/message/:email", (request, response) => {
+//   const { email } = request.params;
+
+//   const user = users.find((user) => user.email === email);
+
+//   if (!user) {
+//     return response.status(404).json({
+//       message: "E-mail não encontrado, verifique ou crie um conta.",
+//     });
+//   }
+
+//   const userNotes = notes.filter((note) => note.email === email);
+
+//   response.status(200).json({
+//     message: `Seja bem vindo(a)!`,
+//     notes: userNotes,
+//   });
+// });
+
 router.get("/message/:email", (request, response) => {
   const { email } = request.params;
+
+  const { page, perPage } = request.query;
 
   const user = users.find((user) => user.email === email);
 
@@ -48,11 +69,24 @@ router.get("/message/:email", (request, response) => {
     });
   }
 
+  const currentPage = parseInt(page) || 1;
+  const itemsPerPage = parseInt(perPage) || 10;
+
   const userNotes = notes.filter((note) => note.email === email);
 
+  const totalItems = userNotes.length;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const paginatedNotes = userNotes.slice(startIndex, endIndex);
+
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
   response.status(200).json({
-    message: `Seja bem vindo(a)!`,
-    notes: userNotes,
+    notes: paginatedNotes,
+    totalPages: totalPages,
+    currentPage: currentPage,
   });
 });
 
